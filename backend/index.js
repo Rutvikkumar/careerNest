@@ -12,34 +12,32 @@ dotenv.config({});
 
 const app = express();
 
-// middleware
+// Middleware
 app.use(express.json());
-app.use(express.urlencoded({extended:true}));
+app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
-const corsOptions = {
-    origin:['http://localhost:5173','https://careernest.netlify.app'],
-    credentials:true
-}
 
+// CORS options
+const corsOptions = {
+    origin: ['https://careernest.netlify.app'], // Allowed origins
+    credentials: true, // Allow cookies and other credentials
+    methods: ['GET', 'POST', 'PUT', 'DELETE'], // Allowed methods
+    allowedHeaders: ['Content-Type', 'Authorization'], // Allowed headers
+};
+
+// Apply CORS with specific options
 app.use(cors(corsOptions));
 
-app.use(cors({
-    origin: '*'
-  }));
-  
 
-const PORT = process.env.PORT || 3000;
-
-
-// api's
+// API routes
 app.use("/api/v1/user", userRoute);
 app.use("/api/v1/company", companyRoute);
 app.use("/api/v1/job", jobRoute);
 app.use("/api/v1/application", applicationRoute);
 
-
-
-app.listen(PORT,()=>{
+// Start the server
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
     connectDB();
     console.log(`Server running at port ${PORT}`);
-})
+});
