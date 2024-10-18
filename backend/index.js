@@ -19,8 +19,7 @@ app.use(cookieParser());
 
 // CORS options
 const corsOptions = {
-    origin:'*',
-    // origin: ['https://careernest.netlify.app'], // Allowed origins
+    origin: ['https://careernest.netlify.app'], // Allowed origins
     credentials: true, // Allow cookies and other credentials
     methods: ['GET', 'POST', 'PUT', 'DELETE'], // Allowed methods
     allowedHeaders: ['Content-Type', 'Authorization'], // Allowed headers
